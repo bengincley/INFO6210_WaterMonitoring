@@ -77,3 +77,135 @@ CREATE TABLE Waterbody
  waterbody_state VARCHAR(32) NOT NULL,
  waterbody_classification VARCHAR(32) NOT NULL
  );
+ 
+ -- WaterDissolvedOxygen
+create table WaterDissolvedOxygen
+(WaterDissolvedOxygen_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+dissolved_oxygen_value DECIMAL,
+dissolved_oxygen_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- AmbientTemperature
+create table AmbientTemperature 
+(AmbientTemperature_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+temperature_value DECIMAL,
+temperature_units VARCHAR(1),
+measurement_time TIMESTAMP
+);
+
+-- WaterTotalPhosphorous
+create table WaterTotalPhosphorous 
+(WaterTotalPhosphorous_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+total_phosphorus_value DECIMAL,
+total_phosphorus_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- AmbientWind
+create table AmbientWind 
+(AmbientWind_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+wind_speed_value DECIMAL,
+wind_speed_units VARCHAR(8),
+wind_direction VARCHAR(4),
+measurement_time TIMESTAMP
+);
+
+-- AmbientHumidity
+create table AmbientHumidity 
+(AmbientHumidity_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+humidity_value DECIMAL,
+measurement_time TIMESTAMP
+);
+
+-- AmbientWind
+create table AmbientWind 
+(AmbientWind_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+wind_speed_value DECIMAL,
+wind_speed_units VARCHAR(8),
+wind_direction VARCHAR(4),
+measurement_time TIMESTAMP
+);
+
+-- WaterSalinity
+create table  WaterSalinity 
+( WaterSalinity_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+salinity_value DECIMAL,
+salinity_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- WaterpH
+create table  WaterpH
+(WaterpH_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+ph_value DECIMAL,
+measurement_time TIMESTAMP
+);
+
+-- WaterBiological
+create table  WaterBiological 
+(WaterBiological_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+total_cell_count_value INT,
+optical_density_value DECIMAL,
+chlorophyll_a_value DECIMAL,
+chlorophyll_a_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- WaterTurbidity
+create table  WaterTurbidity 
+(WaterTurbidity_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+water_turbidity_value DECIMAL,
+water_turbidity_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- WaterTemperature
+create table  WaterTemperature
+(WaterTemperature_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+temperature_value DECIMAL,
+temperature_units VARCHAR(1),
+measurement_time TIMESTAMP
+);
+
+-- WaterTotalNitrogen
+create table  WaterTotalNitrogen
+(WaterTotalNitrogen_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+total_nitrogen_value DECIMAL,
+total_nitrogen_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
+
+-- WaterTDS
+create table  WaterTDS
+(WaterTDS_ID  INT not null PRIMARY KEY,
+instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
+waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
+TDS_value DECIMAL,
+TDS_units VARCHAR(8),
+measurement_time TIMESTAMP
+);
