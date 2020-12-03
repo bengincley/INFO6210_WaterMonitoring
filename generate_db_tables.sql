@@ -118,7 +118,7 @@ measurement_time DATETIME
 );
 
 -- WaterTotalPhosphorous
-create table WaterTotalPhosphorous 
+create table WaterTotalPhosphorus 
 (WaterTotalPhosphorous_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
@@ -144,17 +144,6 @@ create table AmbientHumidity
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
 humidity_value DECIMAL,
-measurement_time DATETIME
-);
-
--- AmbientWind
-create table AmbientWind 
-(AmbientWind_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
-waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-wind_speed_value DECIMAL,
-wind_speed_units VARCHAR(8),
-wind_direction VARCHAR(4),
 measurement_time DATETIME
 );
 
