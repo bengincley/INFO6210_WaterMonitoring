@@ -1,0 +1,6 @@
+regulation_ID ,regulation_jurisdiction,regulation_standard,dissolved_oxygen,water_temperature,bacteria,solids,color,turbidity,salinity,nitrogen,phosphorous,radioactivity,algal_cell_count,microcystin_concentration
+1,US,The Safe Drinking Water Act,21.9,7.7,2,0.005647153,11.7,1.6,0.4,0.6,2.5,0.013,1493,0.628194375
+2,US,National Primary Drinking Water Regulations,17.4,11.6,69.7,0.005806422,14.5,1.9,0.2,1.2,1.5,0.025,1777,0.528283818
+3,US,National Secondary Drinking Water Regulations,16.5,6.5,64,0.007542029,7.2,3.3,0.5,1,2.9,0.014,1819,0.559668853
+4,US,Unregulated Contaminants,12.4,9.2,90.8,0.003748977,11.8,1,0.4,1.4,2.4,0.016,2896,0.0030521
+5,US,Bottled Water Regulations,17.7,11.6,21.4,0.006871555,10.9,0.7,0.3,1,2.4,0.011,1520,0.643954936
