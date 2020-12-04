@@ -11,26 +11,6 @@ go
 use ProjectTeam1;
 go
 
--- Create DMK
-CREATE MASTER KEY
-ENCRYPTION BY PASSWORD = '1';
-
--- Create certificate to protect symmetric key
-CREATE CERTIFICATE Proj1
-WITH SUBJECT = 'Project Team 1 certificate',
-EXPIRY_DATE = '2099-12-31';
-
--- Create symmetric key to encrypt data
-CREATE SYMMETRIC KEY SymKey
-WITH ALGORITHM = AES_128
-ENCRYPTION BY CERTIFICATE Proj1;
-
--- Open Sym Key
-OPEN SYMMETRIC KEY SymKey
-DECRYPTION BY CERTIFICATE Proj1;
-
-
-
 -------------------------------------------------------------------------------
 ---------------------------- Dimension Tables ---------------------------------
 -------------------------------------------------------------------------------
@@ -116,6 +96,23 @@ PRIMARY KEY(instrument_ID,researcher_ID)
 -------------------------------------------------------------------------------
 ---------------------------- Functions ----------------------------------------
 -------------------------------------------------------------------------------
+
+--Check if Salinity meets requirement
+CREATE FUNCTION dbo.fn_MeetsCriteriaSalinity(@WaterbodyID INT, @value DECIMAL)
+RETURNS INT
+AS
+	BEGIN
+		DECLARE @output INT
+		IF (SELECT salinity
+			FROM Regulation r
+			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
+			and w.waterbody_ID = @WaterbodyID
+			) < @value
+		SET @output = 1
+		ELSE
+		SET @output = 0
+	RETURN @output
+END;
 
 --Check if Salinity meets requirement
 CREATE FUNCTION dbo.fn_MeetsCriteriaSalinity(@WaterbodyID INT, @value DECIMAL)
