@@ -11,6 +11,26 @@ go
 use ProjectTeam1;
 go
 
+-- Create DMK
+CREATE MASTER KEY
+ENCRYPTION BY PASSWORD = '1';
+
+-- Create certificate to protect symmetric key
+CREATE CERTIFICATE Proj1
+WITH SUBJECT = 'Project Team 1 certificate',
+EXPIRY_DATE = '2099-12-31';
+
+-- Create symmetric key to encrypt data
+CREATE SYMMETRIC KEY SymKey
+WITH ALGORITHM = AES_128
+ENCRYPTION BY CERTIFICATE Proj1;
+
+-- Open Sym Key
+OPEN SYMMETRIC KEY SymKey
+DECRYPTION BY CERTIFICATE Proj1;
+
+
+
 -------------------------------------------------------------------------------
 ---------------------------- Dimension Tables ---------------------------------
 -------------------------------------------------------------------------------
@@ -30,9 +50,7 @@ institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
 researcher_firstname VARCHAR(32) not null,
 researcher_lastname VARCHAR(32) not null,
 researcher_email VARCHAR(32),
-researcher_phone VARCHAR(16),
-username VARCHAR(32) not null,
-password_encrypted VARCHAR(256) not null
+researcher_phone VARCHAR(16)
 );
 
 -- Instrument
