@@ -59,18 +59,18 @@ CREATE TABLE Regulation
 (regulation_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
  regulation_jurisdiction VARCHAR(32) NOT NULL,
  regulation_standard VARCHAR(32) NOT NULL,
- dissolved_oxygen DECIMAL(10,10) NOT NULL,
- water_temperature DECIMAL(10,10) NOT NULL,
- bacteria DECIMAL(10,10) NOT NULL,
- solids DECIMAL(10,10) NOT NULL,
- color DECIMAL(10,10) NOT NULL,
- turbidity DECIMAL(10,10) NOT NULL,
- salinity DECIMAL(10,10) NOT NULL,
- nitrogen DECIMAL(10,10) NOT NULL,
- phosphorus DECIMAL(10,10) NOT NULL,
- radioactivity DECIMAL(10,10) NOT NULL,
+ dissolved_oxygen DECIMAL(9,6) NOT NULL,
+ water_temperature DECIMAL(9,6) NOT NULL,
+ bacteria DECIMAL(9,6) NOT NULL,
+ solids DECIMAL(9,6) NOT NULL,
+ color DECIMAL(9,6) NOT NULL,
+ turbidity DECIMAL(9,6) NOT NULL,
+ salinity DECIMAL(9,6) NOT NULL,
+ nitrogen DECIMAL(9,6) NOT NULL,
+ phosphorus DECIMAL(9,6) NOT NULL,
+ radioactivity DECIMAL(9,6) NOT NULL,
  algal_cell_count INT NOT NULL,
- microcystin_concentration DECIMAL(10,10) NOT NULL
+ microcystin_concentration DECIMAL(9,6) NOT NULL
  );
 
  -- Water body
@@ -232,7 +232,7 @@ create table WaterDissolvedOxygen
 (WaterDissolvedOxygen_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-dissolved_oxygen_value DECIMAL(10,10),
+dissolved_oxygen_value DECIMAL(9,6),
 dissolved_oxygen_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -242,7 +242,7 @@ create table AmbientTemperature
 (AmbientTemperature_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-temperature_value DECIMAL(10,10),
+temperature_value DECIMAL(9,6),
 temperature_units VARCHAR(1),
 measurement_time DATETIME
 );
@@ -252,7 +252,7 @@ create table WaterTotalPhosphorus
 (WaterTotalPhosphorus_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-total_phosphorus_value DECIMAL(10,10),
+total_phosphorus_value DECIMAL(9,6),
 total_phosphorus_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -262,7 +262,7 @@ create table AmbientWind
 (AmbientWind_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-wind_speed_value DECIMAL(10,10),
+wind_speed_value DECIMAL(9,6),
 wind_speed_units VARCHAR(8),
 wind_direction VARCHAR(4),
 measurement_time DATETIME
@@ -273,7 +273,7 @@ create table AmbientHumidity
 (AmbientHumidity_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-humidity_value DECIMAL(10,10),
+humidity_value DECIMAL(9,6),
 measurement_time DATETIME
 );
 
@@ -282,7 +282,7 @@ create table WaterSalinity
 ( WaterSalinity_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-salinity_value DECIMAL(10,10),
+salinity_value DECIMAL(9,6),
 salinity_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -292,7 +292,7 @@ create table WaterpH
 (WaterpH_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-ph_value DECIMAL(10,10),
+ph_value DECIMAL(9,6),
 measurement_time DATETIME
 );
 
@@ -302,8 +302,8 @@ create table WaterBiological
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
 total_cell_count_value INT,
-optical_density_value DECIMAL(10,10),
-chlorophyll_a_value DECIMAL(10,10),
+optical_density_value DECIMAL(9,6),
+chlorophyll_a_value DECIMAL(9,6),
 chlorophyll_a_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -313,7 +313,7 @@ create table WaterTurbidity
 (WaterTurbidity_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-water_turbidity_value DECIMAL(10,10),
+water_turbidity_value DECIMAL(9,6),
 water_turbidity_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -323,7 +323,7 @@ create table WaterTemperature
 (WaterTemperature_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-temperature_value DECIMAL(10,10),
+temperature_value DECIMAL(9,6),
 temperature_units VARCHAR(1),
 measurement_time DATETIME
 );
@@ -333,7 +333,7 @@ create table WaterTotalNitrogen
 (WaterTotalNitrogen_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-total_nitrogen_value DECIMAL(10,10),
+total_nitrogen_value DECIMAL(9,6),
 total_nitrogen_units VARCHAR(8),
 measurement_time DATETIME
 );
@@ -343,7 +343,7 @@ create table WaterTDS
 (WaterTDS_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
-TDS_value DECIMAL(10,10),
+TDS_value DECIMAL(9,6),
 TDS_units VARCHAR(8),
 measurement_time DATETIME
 );
