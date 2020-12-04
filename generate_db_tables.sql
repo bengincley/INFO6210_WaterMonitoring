@@ -30,15 +30,17 @@ institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
 researcher_firstname VARCHAR(32) not null,
 researcher_lastname VARCHAR(32) not null,
 researcher_email VARCHAR(32),
-researcher_phone VARCHAR(16)
+researcher_phone VARCHAR(16),
+username VARCHAR(32) not null,
+password_encrypted VARCHAR(256) not null
 );
 
 -- Instrument
 create table Instrument
 (instrument_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
-instrument_latitude DECIMAL(10,10)(8,6),
-instrument_longitude DECIMAL(10,10)(9,6),
+instrument_latitude DECIMAL(8,6),
+instrument_longitude DECIMAL(9,6),
 instrument_type VARCHAR(32),
 instrument_manufacturer VARCHAR(32),
 instrument_activation_date DATETIME
@@ -76,8 +78,8 @@ CREATE TABLE Waterbody
 (waterbody_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
  waterbodymanagement_ID INT FOREIGN KEY REFERENCES dbo.WaterbodyManagement(waterbodymanagement_ID),
  regulation_ID INT FOREIGN KEY REFERENCES dbo.Regulation(regulation_ID),
- waterbody_latitude DECIMAL(10,10)(9,6) NOT NULL,
- waterbody_longitude DECIMAL(10,10)(9,6) NOT NULL,
+ waterbody_latitude DECIMAL(9,6) NOT NULL,
+ waterbody_longitude DECIMAL(9,6) NOT NULL,
  waterbody_state VARCHAR(32) NOT NULL,
  waterbody_classification VARCHAR(32) NOT NULL
  );
