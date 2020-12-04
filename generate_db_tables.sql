@@ -370,3 +370,53 @@ ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaOxygen(waterbody_ID, dissolved_oxygen_
 -------------------------------------------------------------------------------
 ---------------------------------- Views --------------------------------------
 -------------------------------------------------------------------------------
+
+CREATE VIEW dbo.vw_ChemicalsByYear
+AS
+SELECT 
+	o.yr as [Year],
+	o.av as [Average Oxygen Per Year],
+	n.av as [Average Nitrogen Per Year],
+	p.av as [Average Phosphorus Per Year]
+FROM 
+	(SELECT YEAR(measurement_time) as yr, avg(dissolved_oxygen_value) as av
+	from WaterDissolvedOxygen 
+	group by year(measurement_time)) o
+INNER JOIN
+	(SELECT YEAR(measurement_time) as yr, avg(total_nitrogen_value) as av
+	from WaterTotalNitrogen 
+	group by year(measurement_time)) n on n.yr = o.yr
+INNER JOIN
+	(SELECT YEAR(measurement_time) as yr, avg(total_phosphorus_value) as av
+	from WaterTotalPhosphorus 
+	group by year(measurement_time)) p on p.yr = o.yr
+
+
+CREATE VIEW dbo.vw_WaterKeyMetricsByMonth
+AS
+SELECT 
+	o.yr as [Year],
+	o.mo as [Month],
+	o.av as [Average Turbidity Per Month],
+	t.av as [Average Total Dissolved Solids Per Month],
+	p.av as [Average pH Per Month]
+FROM 
+	(SELECT YEAR(measurement_time) as yr, 
+	MONTH(measurement_time) as mo,
+	avg(water_turbidity_value) as av
+	from WaterTurbidity 
+	group by year(measurement_time), MONTH(measurement_time)) o
+INNER JOIN
+	(SELECT YEAR(measurement_time) as yr,
+		MONTH(measurement_time) as mo,
+		avg(TDS_value) as av
+	from WaterTDS 
+	group by year(measurement_time), MONTH(measurement_time)) t
+	on t.yr = o.yr and t.mo = o.mo
+INNER JOIN
+	(SELECT YEAR(measurement_time) as yr,
+		MONTH(measurement_time) as mo,
+		avg(ph_value) as av
+	from WaterpH 
+	group by year(measurement_time), MONTH(measurement_time)) p 
+	on p.yr = o.yr and p.mo = o.mo
