@@ -30,7 +30,9 @@ institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
 researcher_firstname VARCHAR(32) not null,
 researcher_lastname VARCHAR(32) not null,
 researcher_email VARCHAR(32),
-researcher_phone VARCHAR(16)
+researcher_phone VARCHAR(16),
+username VARCHAR(32) not null,
+password_encrypted VARCHAR(256) not null
 );
 
 -- Instrument
@@ -83,6 +85,44 @@ CREATE TABLE Waterbody
  );
 
 -------------------------------------------------------------------------------
+---------------------- Researcher Insert and Encryption -----------------------
+-------------------------------------------------------------------------------
+
+-- Create master key
+CREATE MASTER KEY 
+ENCRYPTION BY PASSWORD = 'Th1s_i5_a_5ecUr3_PwD';
+-- Create certificate
+CREATE CERTIFICATE SecurityCertificate
+WITH SUBJECT = 'Project Team 1 Security Certificate',
+EXPIRY_DATE = '2099-12-31';
+-- Create symmetric key
+CREATE SYMMETRIC KEY PT1SymmetricKey
+WITH ALGORITHM = AES_128
+ENCRYPTION BY CERTIFICATE SecurityCertificate;
+-- Open symmetric key
+OPEN SYMMETRIC KEY PT1SymmetricKey
+DECRYPTION BY CERTIFICATE SecurityCertificate;
+
+-- Insert encrypted data
+INSERT INTO dbo.Researcher
+(institution_ID,researcher_firstname,researcher_lastname,researcher_email,researcher_phone,username,password_encrypted )
+VALUES
+(1,'Benjamin','Gincley','gincley.b@northeastern.edu','(617) 555-0001','awesomepossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'awesomepassword'))),
+(1,'Arie','Halpern','halpern.a@northeastern.edu','(617) 555-0002','okpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'okpassword'))),
+(1,'Melissa','Scholem Heller','scholem.m@northeastern.edu','(617) 555-0003','goodpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'goodpassword'))),
+(5,'Chenxuan','He','he.c@cleanlakes.com','(617) 555-000','alrightpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'alrightpassword'))),
+(1,'Neeraj','Sudhakar','sudhakar.n@northeastern.edu','(617) 555-0005','verygoodpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'verygoodpassword'))),
+(2,'Ameet','Pinto','a.pinto@bu.edu','(617) 555-0006','decentpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'decentpassword'))),
+(2,'Chris','Anderson','c.anderson@bu.edu','(617) 555-0007','badpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'badpassword'))),
+(3,'Adam','Smith','adam@epa.gov','(617) 555-0008','mediocrepossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'mediocrepassword'))),
+(3,'Katherine','Huang','katie@epa.gov','(617) 555-0009','plainpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'plainpassword'))),
+(4,'Michael','Williams','mike@mwra.com','(617) 555-0010','greatpossum' , EncryptByKey(Key_GUID(N'PT1SymmetricKey'), convert(varbinary, 'greatpassword')));
+
+-- Close symmetric key
+CLOSE SYMMETRIC KEY PT1SymmetricKey;
+
+
+-------------------------------------------------------------------------------
 ---------------------------- Join Tables --------------------------------------
 -------------------------------------------------------------------------------
 
@@ -107,29 +147,81 @@ AS
 			FROM Regulation r
 			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
 			and w.waterbody_ID = @WaterbodyID
-			) < @value
+			) >= @value
 		SET @output = 1
 		ELSE
 		SET @output = 0
 	RETURN @output
 END;
 
---Check if Salinity meets requirement
-CREATE FUNCTION dbo.fn_MeetsCriteriaSalinity(@WaterbodyID INT, @value DECIMAL)
+--Check if Turbidity meets requirement
+CREATE FUNCTION dbo.fn_MeetsCriteriaTurbidity(@WaterbodyID INT, @value DECIMAL)
 RETURNS INT
 AS
 	BEGIN
 		DECLARE @output INT
-		IF (SELECT salinity
+		IF (SELECT turbidity
 			FROM Regulation r
 			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
 			and w.waterbody_ID = @WaterbodyID
-			) < @value
+			) >= @value
 		SET @output = 1
 		ELSE
 		SET @output = 0
 	RETURN @output
 END
+
+--Check if Nitrogen meets requirement
+CREATE FUNCTION dbo.fn_MeetsCriteriaNitrogen(@WaterbodyID INT, @value DECIMAL)
+RETURNS INT
+AS
+	BEGIN
+		DECLARE @output INT
+		IF (SELECT nitrogen
+			FROM Regulation r
+			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
+			and w.waterbody_ID = @WaterbodyID
+			) >= @value
+		SET @output = 1
+		ELSE
+		SET @output = 0
+	RETURN @output
+END
+
+--Check if Phosphorus meets requirement
+CREATE FUNCTION dbo.fn_MeetsCriteriaPhosphorus(@WaterbodyID INT, @value DECIMAL)
+RETURNS INT
+AS
+	BEGIN
+		DECLARE @output INT
+		IF (SELECT phosphorus
+			FROM Regulation r
+			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
+			and w.waterbody_ID = @WaterbodyID
+			) >= @value
+		SET @output = 1
+		ELSE
+		SET @output = 0
+	RETURN @output
+END
+
+--Check if Oxygen meets requirement
+CREATE FUNCTION dbo.fn_MeetsCriteriaOxygen(@WaterbodyID INT, @value DECIMAL)
+RETURNS INT
+AS
+	BEGIN
+		DECLARE @output INT
+		IF (SELECT dissolved_oxygen
+			FROM Regulation r
+			INNER JOIN Waterbody w on w.regulation_ID = r.regulation_ID
+			and w.waterbody_ID = @WaterbodyID
+			) >= @value
+		SET @output = 1
+		ELSE
+		SET @output = 0
+	RETURN @output
+END
+
 
 -------------------------------------------------------------------------------
 ---------------------------- Fact Tables --------------------------------------
@@ -257,6 +349,24 @@ measurement_time DATETIME
 );
 
 -------------------------------------------------------------------------------
----------------------------------- Views --------------------------------------
+--------------------- Adding Computed Values to Columns -----------------------
 -------------------------------------------------------------------------------
 
+ALTER TABLE WaterSalinity
+ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaSalinity(waterbody_ID, salinity_value));
+
+ALTER TABLE WaterTurbidity
+ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaTurbidity(waterbody_ID, water_turbidity_value));
+
+ALTER TABLE WaterTotalPhosphorus
+ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaPhosphorus(waterbody_ID, total_phosphorus_value));
+
+ALTER TABLE WaterTotalNitrogen
+ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaNitrogen(waterbody_ID, total_nitrogen_value));
+
+ALTER TABLE WaterDissolvedOxygen
+ADD MeetsCriteria AS (dbo.fn_MeetsCriteriaOxygen(waterbody_ID, dissolved_oxygen_value));
+
+-------------------------------------------------------------------------------
+---------------------------------- Views --------------------------------------
+-------------------------------------------------------------------------------
