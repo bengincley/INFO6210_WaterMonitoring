@@ -33,8 +33,3 @@ VALUES
 
 -- Close and drop symmetric key
 CLOSE SYMMETRIC KEY PT1SymmetricKey;
-DROP SYMMETRIC KEY PT1SymmetricKey;
--- Drop the certificate
-DROP CERTIFICATE SecurityCertificate;
---Drop the master key
-DROP MASTER KEY;
