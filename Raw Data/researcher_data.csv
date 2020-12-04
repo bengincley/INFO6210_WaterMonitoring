@@ -1,10 +1,11 @@
-﻿0001,001,Benjamin,Gincley,gincley.b@northeastern.edu,6175550001
-0002,001,Arie,Halpern,halpern.a@northeastern.edu,6175550002
-0003,001,Melissa,Scholem Heller,scholem.m@northeastern.edu,6175550003
-0004,005,Chenxuan,He,he.c@cleanlakes.com,6175550004
-0005,001,Neeraj,Sudhakar,sudhakar.n@northeastern.edu,6175550005
-0006,002,Ameet,Pinto,a.pinto@bu.edu,6175550006
-0007,002,Chris,Anderson,c.anderson@bu.edu,6175550007
-0008,003,Adam,Smith,adam@epa.gov,6175550008
-0009,003,Katherine,Huang,katie@epa.gov,6175550009
-0010,004,Michael,Williams,mike@mwra.com,6175550010
+﻿institution_ID,researcher_firstname,researcher_lastname,researcher_email,researcher_phone
+1,Benjamin,Gincley,gincley.b@northeastern.edu,(617) 555-0001
+1,Arie,Halpern,halpern.a@northeastern.edu,(617) 555-0002
+1,Melissa,Scholem Heller,scholem.m@northeastern.edu,(617) 555-0003
+5,Chenxuan,He,he.c@cleanlakes.com,(617) 555-0004
+1,Neeraj,Sudhakar,sudhakar.n@northeastern.edu,(617) 555-0005
+2,Ameet,Pinto,a.pinto@bu.edu,(617) 555-0006
+2,Chris,Anderson,c.anderson@bu.edu,(617) 555-0007
+3,Adam,Smith,adam@epa.gov,(617) 555-0008
+3,Katherine,Huang,katie@epa.gov,(617) 555-0009
+4,Michael,Williams,mike@mwra.com,(617) 555-0010

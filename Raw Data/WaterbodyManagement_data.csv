@@ -1,9 +1,9 @@
-waterbodymanagement_ID,management_organization,management_email ,management_phone 
-3,US Water Alliance,info@uswateralliance.org,(415) 921-9010
-8,U.S. EPA National Vehicle and Fuel Emissions Laboratory (NVFEL),https://twitter.com/EPA,(734) 214-4200
-7,U.S. EPA National Enforcement Investigations Center Laboratory (NEIC),https://twitter.com/EPA,(303) 462-9000
-6,U.S. EPA National Center for Radiation Field Operations (NCRFO),https://twitter.com/EPA,(702) 784-8200
-5,U.S. EPA National Analytical Radiation Environmental Laboratory (NAREL),https://twitter.com/EPA,(334) 270-3400
-4,U.S. EPA Environmental Science Center,https://twitter.com/EPA,(410) 305-2800
-1,Pacific Institute,info@pacinst.org,510-251-1600
-2,American Water Resources Association,info@awra.org?,(540) 687-8390
+management_organization,management_email ,management_phone 
+US Water Alliance,info@uswateralliance.org,(415) 921-9010
+U.S. EPA National Vehicle and Fuel Emissions Laboratory (NVFEL),admin@epa.gov,(734) 214-4200
+U.S. EPA National Enforcement Investigations Center Laboratory (NEIC),admin@epa.gov,(303) 462-9000
+U.S. EPA National Center for Radiation Field Operations (NCRFO),admin@epa.gov,(702) 784-8200
+U.S. EPA National Analytical Radiation Environmental Laboratory (NAREL),admin@epa.gov,(334) 270-3400
+U.S. EPA Environmental Science Center,admin@epa.gov,(410) 305-2800
+Pacific Institute,info@pacinst.org,(510) 251-1600
+American Water Resources Association,info@awra.org,(540) 687-8390

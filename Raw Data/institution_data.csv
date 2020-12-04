@@ -1,10 +1,11 @@
-﻿001,Northeastern University,Massachusetts,US
-002,Boston University,Massachusetts,US
-003,EPA,Virginia,US
-004,MWRA,Massachusetts,US
-005,Clean Lakes,Washington,US
-006,Clear Waters,Wisconsin,US
-007,Blue Skies,Michigan,US
-008,Rocky Mountain Water,Colorado,US
-009,University of Florida,Florida,US
-010,Mystic,Connecticut,US
+﻿institution_name,institution_state,institution_country
+Northeastern University,Massachusetts,US
+Boston University,Massachusetts,US
+EPA,Virginia,US
+MWRA,Massachusetts,US
+Clean Lakes,Washington,US
+Clear Waters,Wisconsin,US
+Blue Skies,Michigan,US
+Rocky Mountain Water,Colorado,US
+University of Florida,Florida,US
+Mystic,Connecticut,US

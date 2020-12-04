@@ -65,7 +65,7 @@ CREATE TABLE Regulation
  turbidity DECIMAL NOT NULL,
  salinity DECIMAL NOT NULL,
  nitrogen DECIMAL NOT NULL,
- phosphorous DECIMAL NOT NULL,
+ phosphorus DECIMAL NOT NULL,
  radioactivity DECIMAL NOT NULL,
  algal_cell_count INT NOT NULL,
  microcystin_concentration DECIMAL NOT NULL
@@ -119,7 +119,7 @@ measurement_time DATETIME
 
 -- WaterTotalPhosphorus
 create table WaterTotalPhosphorus 
-(WaterTotalPhosphorous_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+(WaterTotalPhosphorus_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
 waterbody_ID INT not null FOREIGN KEY REFERENCES dbo.Waterbody(waterbody_ID),
 total_phosphorus_value DECIMAL,

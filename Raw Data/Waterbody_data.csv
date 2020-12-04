@@ -1,11 +1,11 @@
-waterbody_ID,waterbodymanagement_ID,regulation_ID,waterbody_latitude,waterbody_longitude,waterbody_state,waterbody_classification
-1,2,2,42.172055,-71.916504,MA,storm water
-2,3,3,42.313031,-72.531738,MA,river  
-3,1,4,42.313031,-72.949218,MA,lake
-4,2,1,42.253426,-70.72998,MA,lake
-5,4,5,42.139478,-70.949707,MA,river  
-6,5,4,40.400076,-73.710937,NY,river  
-7,6,3,27.820861,-80.361326,FL,storm water
-8,7,2,"42.483914,",-70.576172,MA,lake
-9,8,1,42.213262,-72.37793,MA,lake
-10,4,3,42.213262,-73.037109,MA,lake
+waterbodymanagement_ID,regulation_ID,waterbody_latitude,waterbody_longitude,waterbody_state,waterbody_classification
+2,2,42.172055,-71.916504,MA,storm water
+3,3,42.313031,-72.531738,MA,river  
+1,4,42.313031,-72.949218,MA,lake
+2,1,42.253426,-70.72998,MA,lake
+4,5,42.139478,-70.949707,MA,river  
+5,4,40.400076,-73.710937,NY,river  
+6,3,27.820861,-80.361326,FL,storm water
+7,2,42.483914,-70.576172,MA,lake
+8,1,42.213262,-72.37793,MA,lake
+4,3,42.213262,-73.037109,MA,lake
