@@ -35,7 +35,7 @@ researcher_phone VARCHAR(16)
 
 -- Instrument
 create table Instrument
-(instrument_ID IDENTITY(1,1) NOT NULL PRIMARY KEY,
+(instrument_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
 instrument_latitude DECIMAL(8,6),
 instrument_longitude DECIMAL(9,6),
@@ -46,7 +46,7 @@ instrument_activation_date DATETIME
 
 -- One or more to many waterbody
 CREATE TABLE WaterbodyManagement
-(waterbodymanagement_ID IDENTITY(1,1) NOT NULL PRIMARY KEY,
+(waterbodymanagement_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
  management_organization VARCHAR(32) NOT NULL,
  management_email VARCHAR(32) NOT NULL,
  management_phone VARCHAR(32) NOT NULL
@@ -54,7 +54,7 @@ CREATE TABLE WaterbodyManagement
 
  -- Regulation
 CREATE TABLE Regulation
-(regulation_ID IDENTITY(1,1) NOT NULL PRIMARY KEY,
+(regulation_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
  regulation_jurisdiction VARCHAR(32) NOT NULL,
  regulation_standard VARCHAR(32) NOT NULL,
  dissolved_oxygen DECIMAL NOT NULL,
@@ -117,7 +117,7 @@ temperature_units VARCHAR(1),
 measurement_time DATETIME
 );
 
--- WaterTotalPhosphorous
+-- WaterTotalPhosphorus
 create table WaterTotalPhosphorus 
 (WaterTotalPhosphorous_ID BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 instrument_ID INT not null FOREIGN KEY REFERENCES dbo.Instrument(instrument_ID),
