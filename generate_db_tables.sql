@@ -30,7 +30,9 @@ institution_ID INT not null REFERENCES dbo.Institution(institution_ID),
 researcher_firstname VARCHAR(32) not null,
 researcher_lastname VARCHAR(32) not null,
 researcher_email VARCHAR(32),
-researcher_phone VARCHAR(16)
+researcher_phone VARCHAR(16),
+username VARCHAR(32) not null,
+password_encrypted VARCHAR(256) not null
 );
 
 -- Instrument
